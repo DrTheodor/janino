@@ -73,6 +73,7 @@ class IClassLoader {
     public IClass TYPE_java_lang_Iterable;
     public IClass TYPE_java_lang_Long;
     public IClass TYPE_java_lang_Object;
+    public IClass TYPE_java_lang_Var;
     public IClass TYPE_java_lang_Override;
     public IClass TYPE_java_lang_RuntimeException;
     public IClass TYPE_java_lang_Short;
@@ -147,6 +148,7 @@ class IClassLoader {
             this.TYPE_java_lang_Iterable             = this.requireType(Descriptor.JAVA_LANG_ITERABLE);
             this.TYPE_java_lang_Long                 = this.requireType(Descriptor.JAVA_LANG_LONG);
             this.TYPE_java_lang_Object               = this.requireType(Descriptor.JAVA_LANG_OBJECT);
+            this.TYPE_java_lang_Var                  = this.requireType(Descriptor.JAVA_LANG_OBJECT);
             this.TYPE_java_lang_Override             = this.requireType(Descriptor.JAVA_LANG_OVERRIDE);
             this.TYPE_java_lang_RuntimeException     = this.requireType(Descriptor.JAVA_LANG_RUNTIMEEXCEPTION);
             this.TYPE_java_lang_Short                = this.requireType(Descriptor.JAVA_LANG_SHORT);

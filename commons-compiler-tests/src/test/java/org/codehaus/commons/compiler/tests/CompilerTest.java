@@ -38,12 +38,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-import org.codehaus.commons.compiler.CompileException;
-import org.codehaus.commons.compiler.ErrorHandler;
-import org.codehaus.commons.compiler.ICompiler;
-import org.codehaus.commons.compiler.ICompilerFactory;
-import org.codehaus.commons.compiler.ISimpleCompiler;
-import org.codehaus.commons.compiler.Location;
+import org.codehaus.commons.compiler.*;
 import org.codehaus.commons.compiler.lang.ClassLoaders;
 import org.codehaus.commons.compiler.util.Benchmark;
 import org.codehaus.commons.compiler.util.Disassembler;
@@ -659,6 +654,16 @@ class CompilerTest {
 
         // Invoke "pkg1.A.meth()" and verify that the return value is correct.
         Assert.assertEquals(77, cl.loadClass("pkg1.A").getDeclaredMethod("meth").invoke(null));
+    }
+
+    @Test public void
+    testVarTypeInference() throws Exception {
+        IScriptEvaluator evaluator = this.compilerFactory.newScriptEvaluator();
+        evaluator.setReturnType(Object.class);
+        //evaluator.cook("return new StringBuilder() + 1;");
+        evaluator.cook("var test; return test.getClass().getName();");
+
+        Assert.assertEquals(evaluator.evaluate(), "java.lang.StringBuilder");
     }
 
     private static void

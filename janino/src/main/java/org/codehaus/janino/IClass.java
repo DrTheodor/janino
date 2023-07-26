@@ -92,6 +92,8 @@ class IClass implements ITypeVariableOrIClass {
      */
     public static final IClass VOID    = new PrimitiveIClass(Descriptor.VOID);
 
+    public static final IClass VAR    = new PrimitiveIClass(Descriptor.VOID);
+
     /**
      * The {@link IClass} object for the primitive type BYTE.
      */

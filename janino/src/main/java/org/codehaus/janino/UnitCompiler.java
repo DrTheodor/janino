@@ -2810,10 +2810,17 @@ class UnitCompiler {
         for (int k = 0; k < vd.brackets; ++k) variableType = new ArrayType(variableType);
 
         // Ignore "lvds.modifiers.annotations".
+        IType varType = this.getType(variableType);
+
+        Rvalue val = (Rvalue) vd.initializer;
+
+        if (val != null && varType == this.iClassLoader.TYPE_java_lang_Var
+                && val.constantValue != Rvalue.CONSTANT_VALUE_UNKNOWN) {
+            varType = this.getType(val);
+        }
 
         return (vd.localVariable = new LocalVariable(
-            lvds.isFinal(),            // finaL
-            this.getType(variableType) // type
+            lvds.isFinal(), varType
         ));
     }
 
@@ -6927,12 +6934,6 @@ class UnitCompiler {
         @Nullable TypeArgument[] typeArguments,
         Scope                    scope
     ) throws CompileException {
-
-        if ("var".equals(simpleTypeName)) {
-            this.compileError("Local variable type inference NYI", location);
-            return this.iClassLoader.TYPE_java_lang_Object;
-        }
-
         // Method declaration type parameter?
         for (Scope s = scope; !(s instanceof CompilationUnit); s = s.getEnclosingScope()) {
             if (!(s instanceof MethodDeclarator)) continue;
@@ -7172,6 +7173,10 @@ class UnitCompiler {
         }
 
         // 6.5.5.1.8 Give up.
+        if (simpleTypeName.equals("var")) {
+            return this.iClassLoader.TYPE_java_lang_Var;
+        }
+
         this.compileError("Cannot determine simple type name \"" + simpleTypeName + "\"", location);
         return this.iClassLoader.TYPE_java_lang_Object;
     }
