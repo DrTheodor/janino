@@ -31,7 +31,7 @@
 
   <groupId>org.codehaus.janino</groupId>
   <packaging>pom</packaging>
-  <version>3.1.11-SNAPSHOT</version>
+  <version>3.1.10-LVTI</version>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -144,7 +144,7 @@
           <keypass>keypass</keypass>
         </configuration>
       </plugin>
-
+<!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -163,7 +163,7 @@
           </execution>
         </executions>
       </plugin>
-
+-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
